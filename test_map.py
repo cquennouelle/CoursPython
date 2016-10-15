@@ -42,4 +42,15 @@ class MapTest(unittest.TestCase):
         myMap = MazeMap(string)
         self.assertEqual(myMap.getAsString(), string)
         
+    def testLoadFromFile(self):
+        myMap = MazeMap(fileName = "LoadMazeFromFile.test")
+        self.assertEqual(myMap.grid, [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        
+    def testSaveFile(self):        
+        myMap = MazeMap('OOO\nO U\nOOO')
+        myMap.saveToFile('SaveMaze.test')
+        myMap2 = MazeMap(fileName = "SaveMaze.test")
+        self.assertEqual(myMap2.grid, [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        
+        
          
