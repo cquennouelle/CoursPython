@@ -60,5 +60,5 @@ class Mazemap(object):
             string += '\n'
         return string[0:len(string)-1]
 
-
+    # Properties
     grid = property(_get_grid)
