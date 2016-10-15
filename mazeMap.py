@@ -12,20 +12,15 @@ class MazeMap:
     
     def LoadFromString(self, string):
         size = len(string)
-        self.height = 0
-        self.width = 0
         self.grid = []
         if size > 0:
             rows = string.split(sep='\n')
-            self.height = 0
             for row in rows:
                 if len(row) > 0:
                     gridRow = []
                     for letter in row:
                         gridRow.append(letter)
                     self.grid.append(gridRow)
-            self.height = len(self.grid)
-            self.width = len(rows)
             
     def LoadFromFile(self, fileName):
         with open(fileName, 'r') as sourceFile:    
@@ -42,8 +37,6 @@ class MazeMap:
             raise TypeError("Requires a string to build a maze.")
         if string == '':
             if(fileName == ''):
-                self.height = 0
-                self.width = 0
                 self.grid = []
             else:
                 self.LoadFromFile(fileName)
@@ -51,7 +44,7 @@ class MazeMap:
             self.LoadFromString(string)
     
     def __repr__(self):
-        return "<Map {}x{}>\n".format(self.height, self.width) + self.getAsString()
+        return "Maze :\n" + self.getAsString()
         
     def getAsString(self):
         string = str('')

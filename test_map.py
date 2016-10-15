@@ -19,22 +19,16 @@ class MapTest(unittest.TestCase):
     def testInit(self):
         """Test for empty construction."""
         myMap = MazeMap()
-        self.assertEqual(myMap.height, 0)
-        self.assertEqual(myMap.width, 0)
         self.assertEqual(myMap.grid, [])
 
     def testInit2(self):
         """Test construction from an empty string."""
         myMap = MazeMap('')
-        self.assertEqual(myMap.height, 0)
-        self.assertEqual(myMap.width, 0)
         self.assertEqual(myMap.grid, [])
             
     def testInit3(self):
         """Test construction from a string."""
         myMap = MazeMap('OOO\nO U\nOOO')
-        self.assertEqual(myMap.height, 3)
-        self.assertEqual(myMap.width, 3)
         self.assertEqual(myMap.grid, [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
         
     def testGetAsString(self):
