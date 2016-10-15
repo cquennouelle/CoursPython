@@ -5,7 +5,7 @@ Created on Fri Oct 14 20:15:18 2016
 @author: localuser
 """
 
-class Mazemap:
+class Mazemap(object):
     """Class representing a map."""
 
     def _load_from_string(self, string):
@@ -47,6 +47,10 @@ class Mazemap:
     def __repr__(self):
         return "Maze :\n" + self.get_as_string()
 
+    def _get_grid(self):
+        """Acces to the grid."""
+        return self._grid
+
     def get_as_string(self):
         """ Get grid as a string."""
         string = str('')
@@ -55,3 +59,6 @@ class Mazemap:
                 string += col
             string += '\n'
         return string[0:len(string)-1]
+
+
+    grid = property(_get_grid)

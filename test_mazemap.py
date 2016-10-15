@@ -10,7 +10,7 @@ from mazemap import *
 
 class MazemapTest(unittest.TestCase):
     """Test class MazeMap."""
-    
+
     def test_init_with_parameters_error(self):
         """Test construction error when wrong parameter type."""
         with self.assertRaises(TypeError):
@@ -19,36 +19,35 @@ class MazemapTest(unittest.TestCase):
     def test_init_1(self):
         """Test for empty construction."""
         mymap = Mazemap()
-        self.assertEqual(mymap._grid, [])
+        self.assertEqual(mymap.grid, [])
 
     def test_init_2(self):
         """Test construction from an empty string."""
         mymap = Mazemap('')
-        self.assertEqual(mymap._grid, [])
-            
+        self.assertEqual(mymap.grid, [])
+
     def test_init_3(self):
         """Test construction from a string."""
         mymap = Mazemap('OOO\nO U\nOOO')
-        self.assertEqual(mymap._grid, 
+        self.assertEqual(mymap.grid,
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
-        
+
     def test_get_as_string(self):
         """Test method get_as_string."""
         string = 'OOO\nO U\nOOO'
         mymap = Mazemap(string)
         self.assertEqual(mymap.get_as_string(), string)
-        
+
     def test_init_from_file(self):
         """Test construction from a file."""
         mymap = Mazemap(filename="LoadMazeFromFile.test")
-        self.assertEqual(mymap._grid, 
+        self.assertEqual(mymap.grid,
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
-        
-    def test_save_file(self):  
+
+    def test_save_file(self):
         """Test saving mazemap in a file."""
         mymap = Mazemap('OOO\nO U\nOOO')
         mymap.save_to_file('SaveMaze.test')
         mymap2 = Mazemap(filename="SaveMaze.test")
-        self.assertEqual(mymap2._grid, 
+        self.assertEqual(mymap2.grid,
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
-         
