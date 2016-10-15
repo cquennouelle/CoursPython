@@ -32,10 +32,19 @@ class MazedictTest(unittest.TestCase):
         """Test for autosearch method."""
         mazedict = Mazedict()
         mazedict.autosearch('testmazedicttwo')
-        self.assertEqual(mazedict.size(), 2)
+        self.assertEqual(mazedict.size(), 3)
 
     def test_autosearch_error(self):
         """Test autosearch with erroneous parameter type."""
         mazedict = Mazedict()
         with self.assertRaises(TypeError):
             mazedict.autosearch(1)
+
+    def test_get_item(self):
+        """Test access value through a key."""
+        mazedict = Mazedict()
+        mazedict.autosearch('testmazedicttwo')
+        self.assertEqual(str(mazedict["mini"]), "OOO\nO U\nOOO")
+        self.assertEqual(mazedict["mini"].height, 3)
+        self.assertEqual(mazedict["maze1"].height, 21)
+        self.assertEqual(mazedict["maze2"].height, 21)

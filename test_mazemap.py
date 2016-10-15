@@ -32,11 +32,11 @@ class MazemapTest(unittest.TestCase):
         self.assertEqual(mymap.grid,
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
 
-    def test_get_as_string(self):
+    def test_str(self):
         """Test method get_as_string."""
         string = 'OOO\nO U\nOOO'
         mymap = Mazemap(string)
-        self.assertEqual(mymap.get_as_string(), string)
+        self.assertEqual(mymap.__str__(), string)
 
     def test_init_from_file(self):
         """Test construction from a file."""
@@ -51,3 +51,9 @@ class MazemapTest(unittest.TestCase):
         mymap2 = Mazemap(filename="SaveMaze.test")
         self.assertEqual(mymap2.grid,
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+
+    def test_get_height(self):
+        mymap = Mazemap('OOO\nO U\nOOO')
+        self.assertEqual(mymap.height, 3)
+        mymap = Mazemap('OO\nOO')
+        self.assertEqual(mymap.height, 2)

@@ -13,7 +13,7 @@ class Mazemap(object):
         size = len(string)
         self._grid = []
         if size > 0:
-            rows = string.split(sep='\n')
+            rows = string.split('\n')
             for row in rows:
                 if len(row) > 0:
                     gridrow = []
@@ -31,7 +31,7 @@ class Mazemap(object):
     def save_to_file(self, filename):
         """Save maze in a file."""
         with open(filename, 'w') as sourcefile:
-            sourcefile.write(self.get_as_string())
+            sourcefile.write(self.__str__())
 
     def __init__(self, string='', filename=''):
         if type(string) is not str:
@@ -45,13 +45,17 @@ class Mazemap(object):
             self._load_from_string(string)
 
     def __repr__(self):
-        return "Maze :\n" + self.get_as_string()
+        return self.__str__()
 
     def _get_grid(self):
-        """Acces to the grid."""
+        """Access to the grid."""
         return self._grid
 
-    def get_as_string(self):
+    def _get_height(self):
+        """Get the grid heigth."""
+        return len(self._grid)
+
+    def __str__(self):
         """ Get grid as a string."""
         string = str('')
         for row in self._grid:
@@ -62,3 +66,4 @@ class Mazemap(object):
 
     # Properties
     grid = property(_get_grid)
+    height = property(_get_height)
