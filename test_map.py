@@ -36,4 +36,10 @@ class MapTest(unittest.TestCase):
         self.assertEqual(myMap.height, 3)
         self.assertEqual(myMap.width, 3)
         self.assertEqual(myMap.grid, [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        
+    def testGetAsString(self):
+        string = 'OOO\nO U\nOOO'
+        myMap = MazeMap(string)
+        self.assertEqual(myMap.getAsString(), string)
+        
          

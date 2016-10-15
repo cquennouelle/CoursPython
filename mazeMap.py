@@ -36,4 +36,12 @@ class MazeMap:
     
     def __repr__(self):
         return "<Map {}x{}>".format(self.height, self.width)
+        
+    def getAsString(self):
+        string = str('')
+        for row in self.grid:
+            for col in row:
+                string += col
+            string += '\n'
+        return string[0:len(string)-1]
     
