@@ -40,11 +40,20 @@ class MazedictTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             mymazedict.autosearch(1)
 
-    def test_get_item(self):
+    def test_get_item_by_string(self):
         """Test access value through a key."""
         mymazedict = mazedict.Mazedict()
         mymazedict.autosearch('testmazedicttwo')
         self.assertEqual(str(mymazedict["mini"]), "OOO\nO U\nOOO")
         self.assertEqual(mymazedict["mini"].height, 3)
-        self.assertEqual(mymazedict["maze1"].height, 21)
+        self.assertEqual(mymazedict["maze1"].height, 22)
         self.assertEqual(mymazedict["maze2"].height, 21)
+
+    def test_get_item_by_index(self):
+        """Test access value through a key."""
+        mymazedict = mazedict.Mazedict()
+        mymazedict.autosearch('testmazedicttwo')
+        self.assertEqual(str(mymazedict[2]), "OOO\nO U\nOOO")
+        self.assertEqual(mymazedict[0].height, 22)
+        self.assertEqual(mymazedict[1].height, 21)
+        self.assertEqual(mymazedict[2].height, 3)

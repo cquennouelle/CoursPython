@@ -20,4 +20,13 @@ class Roboc(object):
         """Get the selected maze."""
         return self._currentmaze
 
+    def select_maze(self, maze='mini'):
+        """Select a maze by its name."""
+        if type(maze) is str:
+            self._currentmaze = self._mazedict[maze]
+        elif type(maze) is int:
+            self._currentmaze = self._mazedict[maze]
+        else:
+            raise TypeError
+
     currentmaze = property(_get_currentmaze)

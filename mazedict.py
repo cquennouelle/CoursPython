@@ -13,6 +13,7 @@ class Mazedict(object):
     def __init__(self):
         """Construction."""
         self._dict = {}
+        self._mazelist = []
 
     def autosearch(self, dirname):
         """Look for all existing mazemap in the repository 'rep'."""
@@ -25,6 +26,11 @@ class Mazedict(object):
                 pathname = os.path.join(dirname, filename)
                 mazename = filename[:-5].lower()
                 self._dict[mazename] = mazemap.Mazemap(filename=pathname)
+        # Sort dictionary and put it in a list
+        self._mazelist = []
+        for key in self._dict.keys():
+            self._mazelist.append(key)
+        self._mazelist.sort()
 
     def __str__(self):
         """Get a mazedict as a string."""
@@ -35,10 +41,15 @@ class Mazedict(object):
 
     def __getitem__(self, key):
         """Assess item through its key."""
-        return self._dict[key]
+        if type(key) is int:
+#            print('Will select maze : ' + self._mazelist[key])
+            return self._dict[self._mazelist[key]]
+        else:
+            return self._dict[key]
 
     def _get_size(self):
         """Give number of mazemaps."""
         return len(self._dict.values())
 
     size = property(_get_size)
+    
