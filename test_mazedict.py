@@ -6,45 +6,45 @@ Created on Sat Oct 15 16:19:24 2016
 """
 
 import unittest
-from mazedict import *
+import mazedict
 
 class MazedictTest(unittest.TestCase):
     """TestCase for MazeDict class."""
 
     def test_init(self):
         """Test default construction."""
-        mazedict = Mazedict()
-        self.assertEqual(mazedict.size(), 0)
+        mymazedict = mazedict.Mazedict()
+        self.assertEqual(mymazedict.size, 0)
 
     def test_autosearch_0(self):
         """Test for autosearch method."""
-        mazedict = Mazedict()
+        mymazedict = mazedict.Mazedict()
         with self.assertRaises(FileNotFoundError):
-            mazedict.autosearch('erroneousrepname')
+            mymazedict.autosearch('erroneousrepname')
 
     def test_autosearch_1(self):
         """Test for autosearch method."""
-        mazedict = Mazedict()
-        mazedict.autosearch('testmazedictempty')
-        self.assertEqual(mazedict.size(), 0)
+        mymazedict = mazedict.Mazedict()
+        mymazedict.autosearch('testmazedictempty')
+        self.assertEqual(mymazedict.size, 0)
 
     def test_autosearch_2(self):
         """Test for autosearch method."""
-        mazedict = Mazedict()
-        mazedict.autosearch('testmazedicttwo')
-        self.assertEqual(mazedict.size(), 3)
+        mymazedict = mazedict.Mazedict()
+        mymazedict.autosearch('testmazedicttwo')
+        self.assertEqual(mymazedict.size, 3)
 
     def test_autosearch_error(self):
         """Test autosearch with erroneous parameter type."""
-        mazedict = Mazedict()
+        mymazedict = mazedict.Mazedict()
         with self.assertRaises(TypeError):
-            mazedict.autosearch(1)
+            mymazedict.autosearch(1)
 
     def test_get_item(self):
         """Test access value through a key."""
-        mazedict = Mazedict()
-        mazedict.autosearch('testmazedicttwo')
-        self.assertEqual(str(mazedict["mini"]), "OOO\nO U\nOOO")
-        self.assertEqual(mazedict["mini"].height, 3)
-        self.assertEqual(mazedict["maze1"].height, 21)
-        self.assertEqual(mazedict["maze2"].height, 21)
+        mymazedict = mazedict.Mazedict()
+        mymazedict.autosearch('testmazedicttwo')
+        self.assertEqual(str(mymazedict["mini"]), "OOO\nO U\nOOO")
+        self.assertEqual(mymazedict["mini"].height, 3)
+        self.assertEqual(mymazedict["maze1"].height, 21)
+        self.assertEqual(mymazedict["maze2"].height, 21)

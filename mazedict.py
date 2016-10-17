@@ -14,17 +14,15 @@ class Mazedict(object):
         """Construction."""
         self._dict = {}
 
-    def autosearch(self, repname):
+    def autosearch(self, dirname):
         """Look for all existing mazemap in the repository 'rep'."""
-        if type(repname) is not str:
+        if type(dirname) is not str:
             raise TypeError
-        dirlist = os.listdir(repname)
-        #print(dirlist)
+        dirlist = os.listdir(dirname)
         dirlist.sort()
-        #print(dirlist)
         for filename in dirlist:
             if filename.endswith(".maze"):
-                pathname = os.path.join(repname, filename)
+                pathname = os.path.join(dirname, filename)
                 mazename = filename[:-5].lower()
                 self._dict[mazename] = mazemap.Mazemap(filename=pathname)
 
@@ -39,6 +37,8 @@ class Mazedict(object):
         """Assess item through its key."""
         return self._dict[key]
 
-    def size(self):
+    def _get_size(self):
         """Give number of mazemaps."""
         return len(self._dict.values())
+
+    size = property(_get_size)
