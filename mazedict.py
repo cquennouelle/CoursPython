@@ -42,7 +42,6 @@ class Mazedict(object):
     def __getitem__(self, key):
         """Assess item through its key."""
         if type(key) is int:
-#            print('Will select maze : ' + self._mazelist[key])
             return self._dict[self._mazelist[key]]
         else:
             return self._dict[key]

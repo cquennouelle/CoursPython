@@ -51,6 +51,13 @@ class Mazemap(object):
         """Access to the grid."""
         return self._grid
 
+    def __getitem__(self, key):
+        """Assess item through its key."""
+        if type(key) is not tuple:
+            raise TypeError
+        else:
+            return self._grid[key[0]][key[1]]
+
     def _get_height(self):
         """Get the grid heigth."""
         return len(self._grid)

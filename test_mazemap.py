@@ -6,7 +6,7 @@ Created on Tue Oct 11 11:29:14 2016
 """
 
 import unittest
-from mazemap import *
+from mazemap import Mazemap
 
 class MazemapTest(unittest.TestCase):
     """Test class MazeMap."""
@@ -14,7 +14,7 @@ class MazemapTest(unittest.TestCase):
     def test_init_with_parameters_error(self):
         """Test construction error when wrong parameter type."""
         with self.assertRaises(TypeError):
-            mymap = Mazemap(1)
+            _ = Mazemap(1)
 
     def test_init_1(self):
         """Test for empty construction."""
@@ -53,7 +53,21 @@ class MazemapTest(unittest.TestCase):
                          [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
 
     def test_get_height(self):
+        """Test method to get height."""
         mymap = Mazemap('OOO\nO U\nOOO')
         self.assertEqual(mymap.height, 3)
         mymap = Mazemap('OO\nOO')
         self.assertEqual(mymap.height, 2)
+
+    def test_get_cell(self):
+        """Test method to read a cell."""
+        mymap = Mazemap('OOO\nO U\nOOO')
+        self.assertEqual(mymap[0, 0], 'O')
+        self.assertEqual(mymap[0, 1], 'O')
+        self.assertEqual(mymap[0, 2], 'O')
+        self.assertEqual(mymap[1, 0], 'O')
+        self.assertEqual(mymap[1, 1], ' ')
+        self.assertEqual(mymap[1, 2], 'U')
+        self.assertEqual(mymap[2, 0], 'O')
+        self.assertEqual(mymap[2, 1], 'O')
+        self.assertEqual(mymap[2, 2], 'O')

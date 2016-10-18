@@ -81,3 +81,57 @@ class RobocTest(unittest.TestCase):
             + 'O                     O\n'
             + 'O                     O\n'
             + 'OOOOOOOOOOOOOOOOOOOOOOO')
+
+    def test_place_robot(self):
+        """Test method to place a robot in the maze."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        self.assertEqual(rob.robot_place, (1, 1))
+
+    def test_move_south(self):
+        """Test method to move robot one cell south."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        rob.move_south(1)
+        self.assertEqual(rob.robot_place, (2, 1))
+
+    def test_move_south_5(self):
+        """Test method to move robot one cell south."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        rob.move_south(4)
+        self.assertEqual(rob.robot_place, (5, 1))
+        rob.move_south(1)
+        self.assertEqual(rob.robot_place, (5, 1))
+
+    def test_move_east(self):
+        """Test method to move robot one cell east."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        rob.move_south(3)
+        rob.move_east(1)
+        self.assertEqual(rob.robot_place, (4, 2))
+        rob.move_east(2)
+        self.assertEqual(rob.robot_place, (4, 3))
+
+    def test_move_west(self):
+        """Test method to move robot one cell west."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        rob.move_south(3)
+        rob.move_east(2)
+        rob.move_west(1)
+        self.assertEqual(rob.robot_place, (4, 2))
+        rob.move_west(3)
+        self.assertEqual(rob.robot_place, (4, 1))
+
+    def test_move_north(self):
+        """Test method to move robot one cell north."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        rob.move_south(3)
+        rob.move_east(2)
+        rob.move_north(1)
+        self.assertEqual(rob.robot_place, (3, 3))
+        rob.move_north(3)
+        self.assertEqual(rob.robot_place, (1, 3))
