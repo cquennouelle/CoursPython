@@ -17,6 +17,10 @@ class Roboc(object):
         self._currentmaze = self._mazedict['mini']
         self._robot_place = (1, 1)
 
+    def _get_mazedict(self):
+        """Get mazedict."""
+        return self._mazedict
+
     def _get_currentmaze(self):
         """Get the selected maze."""
         return self._currentmaze
@@ -92,3 +96,4 @@ class Roboc(object):
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)
+    mazedict = property(_get_mazedict)

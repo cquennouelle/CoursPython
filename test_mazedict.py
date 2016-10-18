@@ -57,3 +57,11 @@ class MazedictTest(unittest.TestCase):
         self.assertEqual(mymazedict[0].height, 22)
         self.assertEqual(mymazedict[1].height, 21)
         self.assertEqual(mymazedict[2].height, 3)
+
+    def test_get_name_by_index(self):
+        """Test access name through a index."""
+        mymazedict = mazedict.Mazedict()
+        mymazedict.autosearch('testmazedicttwo')
+        self.assertEqual(mymazedict.get_name(0), 'maze1')
+        self.assertEqual(mymazedict.get_name(1), 'maze2')
+        self.assertEqual(mymazedict.get_name(2), 'mini')
