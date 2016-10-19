@@ -71,3 +71,18 @@ class MazemapTest(unittest.TestCase):
         self.assertEqual(mymap[2, 0], 'O')
         self.assertEqual(mymap[2, 1], 'O')
         self.assertEqual(mymap[2, 2], 'O')
+
+    def test_place_robot(self):
+        """Test method to place robot."""
+        mymap = Mazemap('OOO\nO U\nOOO')
+        mygame = mymap.get_game((1, 1))
+        self.assertEqual(mygame[0][0], 'O')
+        self.assertEqual(mygame[0][1], 'O')
+        self.assertEqual(mygame[0][2], 'O')
+        self.assertEqual(mygame[1][0], 'O')
+        self.assertEqual(mygame[1][1], 'R')
+        self.assertEqual(mygame[1][2], 'U')
+        self.assertEqual(mygame[2][0], 'O')
+        self.assertEqual(mygame[2][1], 'O')
+        self.assertEqual(mygame[2][2], 'O')
+        

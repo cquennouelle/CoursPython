@@ -135,3 +135,30 @@ class RobocTest(unittest.TestCase):
         self.assertEqual(rob.robot_place, (3, 3))
         rob.move_north(3)
         self.assertEqual(rob.robot_place, (1, 3))
+
+    def test_game(self):
+        """Test method to display game."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        self.assertEqual(str(rob.game), 'OUOOOOOOOOOOOOOOOOOOOOO\n'
+            + 'ORO O O   O           O\n'
+            + 'O O O O   O           O\n'
+            + 'O O . OO.OO           O\n'
+            + 'O . O             OOOOO\n'
+            + 'O O O    OOOOOOOOOO   O\n'
+            + 'OOOOOOOO.O            O\n'
+            + 'O                     O\n'
+            + 'O                     O\n'
+            + 'OOOOOOOOOOOOOOOOOOO.OOO\n'
+            + 'O                     O\n'
+            + 'OOOOOOOO.OOOOOOOOOOOOOO\n'
+            + 'O                 O   O\n'
+            + 'OOOOOOOOOOOOOOO.OOOOO.O\n'
+            + 'O                     O\n'
+            + 'OOOOOOOOOOOOOOOOOOOOO O\n'
+            + 'O                     O\n'
+            + 'O                     O\n'
+            + 'O                     O\n'
+            + 'O                     O\n'
+            + 'OOOOOOOOOOOOOOOOOOOOOOO')
+        

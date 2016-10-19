@@ -6,6 +6,7 @@ Created on Sat Oct 15 15:17:58 2016
 """
 
 import mazedict
+import math
 
 class Roboc(object):
     """Class containing the game Roboc."""
@@ -94,6 +95,17 @@ class Roboc(object):
         """Get robot place."""
         return self._robot_place
 
+    def _get_game(self):
+        """Method to get the game board."""
+        occupiedgrid = self._currentmaze.get_game(self.robot_place)        
+        string = str('')
+        for row in occupiedgrid:
+            for col in row:
+                string += col
+            string += '\n'
+        return string[0:len(string)-1]
+
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)
     mazedict = property(_get_mazedict)
+    game = property(_get_game)

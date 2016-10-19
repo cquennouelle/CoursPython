@@ -71,6 +71,12 @@ class Mazemap(object):
             string += '\n'
         return string[0:len(string)-1]
 
+    def get_game(self, pos):
+        """Get string map + robot."""
+        occupiedgrid = self._grid
+        occupiedgrid[int(pos[0])][int(pos[1])] = 'R'
+        return occupiedgrid
+
     # Properties
     grid = property(_get_grid)
     height = property(_get_height)
