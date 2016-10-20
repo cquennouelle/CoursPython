@@ -16,9 +16,9 @@ class RobocInterfaceTest(unittest.TestCase):
         _ = RobocInterface('testmazedicttwo')
         self.assertTrue(True)
 
-    def test_run(self):
-        """Test run."""
-        rob = RobocInterface('testmazedicttwo')
-        rob.run()
-        self.assertTrue(True)
+#    def test_run(self):
+#        """Test run."""
+#        rob = RobocInterface('testmazedicttwo')
+#        rob.run()
+#        self.assertTrue(True)
         

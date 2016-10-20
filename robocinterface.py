@@ -7,6 +7,7 @@ Created on Tue Oct 18 22:21:53 2016
 
 from __future__ import print_function
 from roboc import Roboc
+import get_char_code
 
 class RobocInterface(object):
     """Class managing interaction with roboc."""
@@ -41,7 +42,18 @@ class RobocInterface(object):
 
     def _play_game(self):
         """Method to play."""
-        print(self._roboc.game)
+        hitkey = ''
+        while hitkey != 'end':
+            print(self._roboc.game)
+            hitkey = get_char_code.get()
+            if hitkey == 'down':
+                self._roboc.move_south(1)
+            elif hitkey == 'up':
+                self._roboc.move_north(1)
+            elif hitkey == 'left':
+                self._roboc.move_west(1)
+            elif hitkey == 'right':
+                self._roboc.move_east(1)
 
     def run(self):
         """Test run roboc."""
