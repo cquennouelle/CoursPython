@@ -187,7 +187,7 @@ class RobocTest(unittest.TestCase):
     def test_is_won(self):
         """Test for wining game."""
         rob = roboc.Roboc('testmazedicttwo')
-        rob.select_maze(1)
+        rob.select_maze('mini')
         self.assertFalse(rob.is_won())
         rob.move_east(1)
         self.assertTrue(rob.is_won())

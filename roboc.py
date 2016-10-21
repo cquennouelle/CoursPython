@@ -6,6 +6,7 @@ Created on Sat Oct 15 15:17:58 2016
 """
 
 import mazedict
+import grid_cell
 
 class Roboc(object):
     """Class containing the game Roboc."""
@@ -96,9 +97,10 @@ class Roboc(object):
             string += '\n'
         return string[0:len(string)-1]
     
-    def is_won():
+    def is_won(self):
         """Method to know if the game is won."""
-        return false
+        current_cell = self._currentmaze[self._robot_place]
+        return type(current_cell) is grid_cell.Exit
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)

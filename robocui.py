@@ -43,8 +43,9 @@ class RobocUI(object):
     def _play_game(self):
         """Method to play."""
         hitkey = ''
-        while hitkey != 'end' and not self._roboc.iswon():
+        while hitkey != 'end' and not self._roboc.is_won():
             print(self._roboc.game)
+            print('Use arrows or \'x\' to give up.')
             hitkey = get_char_code.get()
             if hitkey == 'down':
                 self._roboc.move_south(1)
@@ -54,6 +55,10 @@ class RobocUI(object):
                 self._roboc.move_west(1)
             elif hitkey == 'right':
                 self._roboc.move_east(1)
+        if(self._roboc.is_won()):
+            print('You\'re out. Congratulations.')
+        else:
+            print('Looser...')
 
     def run(self):
         """Test run roboc."""
