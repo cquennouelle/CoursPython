@@ -183,3 +183,11 @@ class RobocTest(unittest.TestCase):
             + 'O                     O\n'
             + 'O                     O\n'
             + 'OOOOOOOOOOOOOOOOOOOOOOO')
+
+    def test_is_won(self):
+        """Test for wining game."""
+        rob = roboc.Roboc('testmazedicttwo')
+        rob.select_maze(1)
+        self.assertFalse(rob.is_won())
+        rob.move_east(1)
+        self.assertTrue(rob.is_won())

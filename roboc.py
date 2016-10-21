@@ -95,6 +95,10 @@ class Roboc(object):
                 string += str(col)
             string += '\n'
         return string[0:len(string)-1]
+    
+    def is_won():
+        """Method to know if the game is won."""
+        return false
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)

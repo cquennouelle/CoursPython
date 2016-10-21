@@ -14,7 +14,9 @@ class _Getch(object):
         try:
             tty.setraw(sys.stdin.fileno())
             """TODO: manage single character."""
-            char_ = sys.stdin.read(3)
+            char_ = sys.stdin.read(1)
+            if char_=='\x1b':
+                char_ += sys.stdin.read(2)                
         finally:
             termios.tcsetattr(fd_, termios.TCSADRAIN, old_settings)
         return char_
@@ -34,7 +36,7 @@ def get():
         return 'right'
     elif k == '\x1b[D':
         return 'left'
-    elif k == 'xxx':
+    elif k == 'x':
         return 'end'
     else:
         print('not an arrow key! ({})'.format(k))

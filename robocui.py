@@ -43,7 +43,7 @@ class RobocUI(object):
     def _play_game(self):
         """Method to play."""
         hitkey = ''
-        while hitkey != 'end':
+        while hitkey != 'end' and not self._roboc.iswon():
             print(self._roboc.game)
             hitkey = get_char_code.get()
             if hitkey == 'down':
