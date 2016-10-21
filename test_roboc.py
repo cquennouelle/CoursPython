@@ -183,4 +183,3 @@ class RobocTest(unittest.TestCase):
             + 'O                     O\n'
             + 'O                     O\n'
             + 'OOOOOOOOOOOOOOOOOOOOOOO')
-        

@@ -6,7 +6,6 @@ Created on Sat Oct 15 15:17:58 2016
 """
 
 import mazedict
-import math
 
 class Roboc(object):
     """Class containing the game Roboc."""
@@ -39,9 +38,7 @@ class Roboc(object):
         """Move robot of 1 cell south."""
         content = self._currentmaze[self._robot_place[0]+1, \
             self._robot_place[1]]
-        if content == 'O':
-            pass
-        else:
+        if content.is_crossable():
             self._robot_place = (self._robot_place[0] + 1, self._robot_place[1])
 
     def move_south(self, nb_cells):
@@ -53,9 +50,7 @@ class Roboc(object):
         """Move robot of 1 cell east."""
         content = self._currentmaze[self._robot_place[0], \
             self._robot_place[1]+1]
-        if content == 'O':
-            pass
-        else:
+        if content.is_crossable():
             self._robot_place = (self._robot_place[0], self._robot_place[1]+1)
 
     def move_east(self, nb_cells):
@@ -67,9 +62,7 @@ class Roboc(object):
         """Move robot of 1 cell west."""
         content = self._currentmaze[self._robot_place[0], \
             self._robot_place[1]-1]
-        if content == 'O':
-            pass
-        else:
+        if content.is_crossable():
             self._robot_place = (self._robot_place[0], self._robot_place[1]-1)
 
     def move_north(self, nb_cells):
@@ -81,9 +74,7 @@ class Roboc(object):
         """Move robot of 1 cell north."""
         content = self._currentmaze[self._robot_place[0]-1, \
             self._robot_place[1]]
-        if content == 'O':
-            pass
-        else:
+        if content.is_crossable():
             self._robot_place = (self._robot_place[0]-1, self._robot_place[1])
 
     def move_west(self, nb_cells):
@@ -97,11 +88,11 @@ class Roboc(object):
 
     def _get_game(self):
         """Method to get the game board."""
-        occupiedgrid = self._currentmaze.get_game(self.robot_place)        
+        occupiedgrid = self._currentmaze.get_game(self.robot_place)
         string = str('')
         for row in occupiedgrid:
             for col in row:
-                string += col
+                string += str(col)
             string += '\n'
         return string[0:len(string)-1]
 

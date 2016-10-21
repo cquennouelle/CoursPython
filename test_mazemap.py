@@ -7,6 +7,7 @@ Created on Tue Oct 11 11:29:14 2016
 
 import unittest
 from mazemap import Mazemap
+from grid_cell import Door, Wall, Empty, Robot, Exit
 
 class MazemapTest(unittest.TestCase):
     """Test class MazeMap."""
@@ -29,8 +30,15 @@ class MazemapTest(unittest.TestCase):
     def test_init_3(self):
         """Test construction from a string."""
         mymap = Mazemap('OOO\nO U\nOOO')
-        self.assertEqual(mymap.grid,
-                         [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        self.assertTrue(type(mymap.grid[0][0]) is Wall)
+        self.assertTrue(type(mymap.grid[0][1]) is Wall)
+        self.assertTrue(type(mymap.grid[0][2]) is Wall)
+        self.assertTrue(type(mymap.grid[1][0]) is Wall)
+        self.assertTrue(type(mymap.grid[1][1]) is Empty)
+        self.assertTrue(type(mymap.grid[1][2]) is Exit)
+        self.assertTrue(type(mymap.grid[2][0]) is Wall)
+        self.assertTrue(type(mymap.grid[2][1]) is Wall)
+        self.assertTrue(type(mymap.grid[2][2]) is Wall)
 
     def test_str(self):
         """Test method get_as_string."""
@@ -41,16 +49,30 @@ class MazemapTest(unittest.TestCase):
     def test_init_from_file(self):
         """Test construction from a file."""
         mymap = Mazemap(filename="LoadMazeFromFile.test")
-        self.assertEqual(mymap.grid,
-                         [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        self.assertTrue(type(mymap.grid[0][0]) is Wall)
+        self.assertTrue(type(mymap.grid[0][1]) is Wall)
+        self.assertTrue(type(mymap.grid[0][2]) is Wall)
+        self.assertTrue(type(mymap.grid[1][0]) is Wall)
+        self.assertTrue(type(mymap.grid[1][1]) is Empty)
+        self.assertTrue(type(mymap.grid[1][2]) is Exit)
+        self.assertTrue(type(mymap.grid[2][0]) is Wall)
+        self.assertTrue(type(mymap.grid[2][1]) is Wall)
+        self.assertTrue(type(mymap.grid[2][2]) is Wall)
 
     def test_save_file(self):
         """Test saving mazemap in a file."""
-        mymap = Mazemap('OOO\nO U\nOOO')
+        mymap = Mazemap('OOO\nO U\n.OO')
         mymap.save_to_file('SaveMaze.test')
         mymap2 = Mazemap(filename="SaveMaze.test")
-        self.assertEqual(mymap2.grid,
-                         [['O', 'O', 'O'], ['O', ' ', 'U'], ['O', 'O', 'O']])
+        self.assertTrue(type(mymap2.grid[0][0]) is Wall)
+        self.assertTrue(type(mymap2.grid[0][1]) is Wall)
+        self.assertTrue(type(mymap2.grid[0][2]) is Wall)
+        self.assertTrue(type(mymap2.grid[1][0]) is Wall)
+        self.assertTrue(type(mymap2.grid[1][1]) is Empty)
+        self.assertTrue(type(mymap2.grid[1][2]) is Exit)
+        self.assertTrue(type(mymap2.grid[2][0]) is Door)
+        self.assertTrue(type(mymap2.grid[2][1]) is Wall)
+        self.assertTrue(type(mymap2.grid[2][2]) is Wall)
 
     def test_get_height(self):
         """Test method to get height."""
@@ -62,27 +84,25 @@ class MazemapTest(unittest.TestCase):
     def test_get_cell(self):
         """Test method to read a cell."""
         mymap = Mazemap('OOO\nO U\nOOO')
-        self.assertEqual(mymap[0, 0], 'O')
-        self.assertEqual(mymap[0, 1], 'O')
-        self.assertEqual(mymap[0, 2], 'O')
-        self.assertEqual(mymap[1, 0], 'O')
-        self.assertEqual(mymap[1, 1], ' ')
-        self.assertEqual(mymap[1, 2], 'U')
-        self.assertEqual(mymap[2, 0], 'O')
-        self.assertEqual(mymap[2, 1], 'O')
-        self.assertEqual(mymap[2, 2], 'O')
+        self.assertTrue(type(mymap.grid[0][0]) is Wall)
+        self.assertTrue(type(mymap.grid[0][1]) is Wall)
+        self.assertTrue(type(mymap.grid[0][2]) is Wall)
+        self.assertTrue(type(mymap.grid[1][0]) is Wall)
+        self.assertTrue(type(mymap.grid[1][1]) is Empty)
+        self.assertTrue(type(mymap.grid[1][2]) is Exit)
+        self.assertTrue(type(mymap.grid[2][0]) is Wall)
+        self.assertTrue(type(mymap.grid[2][1]) is Wall)
+        self.assertTrue(type(mymap.grid[2][2]) is Wall)
 
     def test_place_robot(self):
         """Test method to place robot."""
         mymap = Mazemap('OOO\nO U\nOOO')
         mygame = mymap.get_game((1, 1))
-        self.assertEqual(mygame[0][0], 'O')
-        self.assertEqual(mygame[0][1], 'O')
-        self.assertEqual(mygame[0][2], 'O')
-        self.assertEqual(mygame[1][0], 'O')
-        self.assertEqual(mygame[1][1], '*')
-        self.assertEqual(mygame[1][2], 'U')
-        self.assertEqual(mygame[2][0], 'O')
-        self.assertEqual(mygame[2][1], 'O')
-        self.assertEqual(mygame[2][2], 'O')
-        
+        self.assertTrue(type(mygame[0][1]) is Wall)
+        self.assertTrue(type(mygame[0][2]) is Wall)
+        self.assertTrue(type(mygame[1][0]) is Wall)
+        self.assertTrue(type(mygame[1][1]) is Robot)
+        self.assertTrue(type(mygame[1][2]) is Exit)
+        self.assertTrue(type(mygame[2][0]) is Wall)
+        self.assertTrue(type(mygame[2][1]) is Wall)
+        self.assertTrue(type(mygame[2][2]) is Wall)

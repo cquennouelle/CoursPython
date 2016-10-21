@@ -9,7 +9,7 @@ from __future__ import print_function
 from roboc import Roboc
 import get_char_code
 
-class RobocInterface(object):
+class RobocUI(object):
     """Class managing interaction with roboc."""
 
     def __init__(self, directory):
@@ -60,3 +60,8 @@ class RobocInterface(object):
         self._print_mazelist()
         self._select_maze()
         self._play_game()
+
+if __name__ == '__main__':
+    RI = RobocUI('testmazedicttwo')
+    RI.run()
+    

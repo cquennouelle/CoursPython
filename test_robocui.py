@@ -6,14 +6,14 @@ Created on Tue Oct 18 22:18:12 2016
 """
 
 import unittest
-from robocinterface import RobocInterface
+from robocui import RobocUI
 
-class RobocInterfaceTest(unittest.TestCase):
+class RobocUITest(unittest.TestCase):
     """Test class roboc_interface."""
 
     def test_init(self):
         """Test construction Roboc interface."""
-        _ = RobocInterface('testmazedicttwo')
+        RobocUI('testmazedicttwo')
         self.assertTrue(True)
 
 #    def test_run(self):

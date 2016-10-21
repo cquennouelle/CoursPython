@@ -4,6 +4,7 @@ Created on Fri Oct 14 20:15:18 2016
 
 @author: localuser
 """
+import grid_cell
 
 class Mazemap(object):
     """Class representing a map."""
@@ -18,7 +19,7 @@ class Mazemap(object):
                 if len(row) > 0:
                     gridrow = []
                     for letter in row:
-                        gridrow.append(letter)
+                        gridrow.append(grid_cell.GridCell.from_char(letter))
                     self._grid.append(gridrow)
 
     def _load_from_file(self, filename):
@@ -67,7 +68,7 @@ class Mazemap(object):
         string = str('')
         for row in self._grid:
             for col in row:
-                string += col
+                string += str(col)
             string += '\n'
         return string[0:len(string)-1]
 
@@ -76,7 +77,7 @@ class Mazemap(object):
         occupiedgrid = []
         for row in self._grid:
             occupiedgrid.append(list(row))
-        occupiedgrid[int(pos[0])][int(pos[1])] = '*'
+        occupiedgrid[int(pos[0])][int(pos[1])] = grid_cell.Robot()
         return occupiedgrid
 
     # Properties
