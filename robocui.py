@@ -18,24 +18,29 @@ class RobocUI(object):
 
     def _print_mazelist(self):
         """Print list of available mazes to choose."""
+        print('0 - autosave')
         mazedict = self._roboc.mazedict
         for n_maze in range(mazedict.size):
             print(str(n_maze+1) + " - " + mazedict.get_name(n_maze))
 
     def _select_maze(self):
         """Method to manage maze selection."""
-        nmaze = input('Enter selected maze number (1-{}):'.format(
+        nmaze = input('Enter selected maze number (1-{}): '.format(
             self._roboc.mazedict.size))
         try:
             nmaze = int(nmaze)
-            if nmaze < 1 or nmaze > self._roboc.mazedict.size:
-                print("Please, enter a number between 1 and {}.".format(
-                    self._roboc.mazedict.size))
-                self._select_maze()
+            if nmaze < 0 or nmaze > self._roboc.mazedict.size:
+                    print("Please, enter a number between 1 and {}.".format(
+                        self._roboc.mazedict.size))
+                    self._select_maze()
             else:
-                self._roboc.select_maze(nmaze-1)
-                print('You\'ve selected: {}'.format(
-                    self._roboc.mazedict.get_name(nmaze-1)))
+                if(nmaze == 0):
+                    self._roboc.reloadautosave()
+                    print('Reload last game')
+                else:
+                    self._roboc.select_maze(nmaze-1)
+                    print('You\'ve selected: {}'.format(
+                        self._roboc.mazedict.get_name(nmaze-1)))
         except ValueError:
             print("Please, enter a valid number.")
             self._select_maze()

@@ -42,6 +42,7 @@ class Roboc(object):
             self._robot_place[1]]
         if content.is_crossable():
             self._robot_place = (self._robot_place[0] + 1, self._robot_place[1])
+            self.autosave()
 
     def move_south(self, nb_cells):
         """Move robot of nb_cells south."""
@@ -54,6 +55,7 @@ class Roboc(object):
             self._robot_place[1]+1]
         if content.is_crossable():
             self._robot_place = (self._robot_place[0], self._robot_place[1]+1)
+            self.autosave()
 
     def move_east(self, nb_cells):
         """Move robot of nb_cells east."""
@@ -66,6 +68,7 @@ class Roboc(object):
             self._robot_place[1]-1]
         if content.is_crossable():
             self._robot_place = (self._robot_place[0], self._robot_place[1]-1)
+            self.autosave()
 
     def move_north(self, nb_cells):
         """Move robot of nb_cells north."""
@@ -78,6 +81,7 @@ class Roboc(object):
             self._robot_place[1]]
         if content.is_crossable():
             self._robot_place = (self._robot_place[0]-1, self._robot_place[1])
+            self.autosave()
 
     def move_west(self, nb_cells):
         """Move robot of nb_cells west."""
