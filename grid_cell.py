@@ -36,7 +36,7 @@ class GridCell(object):
         elif character == '*':
             return Robot()
         else:
-            print('Received {} as parameter.'.format(character))
+            print('Received \'{}\' as parameter.'.format(character))
             raise ValueError
 
 class Exit(GridCell):

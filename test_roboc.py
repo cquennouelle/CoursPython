@@ -191,3 +191,14 @@ class RobocTest(unittest.TestCase):
         self.assertFalse(rob.is_won())
         rob.move_east(1)
         self.assertTrue(rob.is_won())
+
+    def test_autosave(self):
+        """Test for autosaving current game."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('maze1')
+        rob1.move_south(2)
+        rob1.autosave()
+        rob2 = roboc.Roboc('testmazedicttwo')
+        rob2.reloadautosave()
+        self.assertEqual(str(rob1.game), str(rob2.game))
+        

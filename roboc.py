@@ -7,6 +7,7 @@ Created on Sat Oct 15 15:17:58 2016
 
 import mazedict
 import grid_cell
+import mazemap
 
 class Roboc(object):
     """Class containing the game Roboc."""
@@ -96,11 +97,30 @@ class Roboc(object):
                 string += str(col)
             string += '\n'
         return string[0:len(string)-1]
-    
+
     def is_won(self):
         """Method to know if the game is won."""
         current_cell = self._currentmaze[self._robot_place]
         return type(current_cell) is grid_cell.Exit
+
+    def autosave(self):
+        """Method to save the current game to a file."""
+        with open('autosav.sav', 'w') as savefile:
+            savefile.write(str(self._get_game()))
+
+    def reloadautosave(self):
+        """Method to reload autosaved game."""
+        self._currentmaze = mazemap.Mazemap(filename='autosav.sav')
+        nrow = 0
+        ncol = 0
+        for row in self._currentmaze.grid:
+            for col in row:
+                if type(col) is grid_cell.Robot:
+                    self._robot_place = (nrow, ncol)
+                    return
+                ncol += 1
+            ncol = 0
+            nrow += 1
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)
