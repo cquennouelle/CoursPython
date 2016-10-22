@@ -13,10 +13,15 @@ class _Getch(object):
         old_settings = termios.tcgetattr(fd_)
         try:
             tty.setraw(sys.stdin.fileno())
-            """TODO: manage single character."""
             char_ = sys.stdin.read(1)
-            if char_=='\x1b':
-                char_ += sys.stdin.read(2)                
+            if char_== '\x1b':
+                # Read an arrow or other special character
+                char_ += sys.stdin.read(2)
+            else:
+                char_ = char_.upper()
+                if char_ == 'E' or char_ == 'S' or char_ == 'W' or char_ == 'N':
+                    # Read a multiple movement
+                    char_ += sys.stdin.read(1)
         finally:
             termios.tcsetattr(fd_, termios.TCSADRAIN, old_settings)
         return char_
@@ -36,8 +41,11 @@ def get():
         return 'right'
     elif k == '\x1b[D':
         return 'left'
-    elif k == 'x':
+    elif k == 'x' or k == 'X':
         return 'end'
+    elif k[0] == 'E' or k[0] == 'S' or k[0] == 'W' or k[0] == 'N':
+        print('multiple: {}'.format(k))
+        return k        
     else:
         print('not an arrow key! ({})'.format(k))
         return ''

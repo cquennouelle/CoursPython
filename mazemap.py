@@ -67,8 +67,8 @@ class Mazemap(object):
         """ Get grid as a string."""
         string = str('')
         for row in self._grid:
-            for col in row:
-                string += str(col)
+            for cell in row:
+                string += str(cell)
             string += '\n'
         return string[0:len(string)-1]
 

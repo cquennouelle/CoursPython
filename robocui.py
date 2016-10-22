@@ -30,7 +30,7 @@ class RobocUI(object):
         try:
             nmaze = int(nmaze)
             if nmaze < 0 or nmaze > self._roboc.mazedict.size:
-                    print("Please, enter a number between 1 and {}.".format(
+                    print("Please, enter a number between 0 and {}.".format(
                         self._roboc.mazedict.size))
                     self._select_maze()
             else:
@@ -60,6 +60,14 @@ class RobocUI(object):
                 self._roboc.move_west(1)
             elif hitkey == 'right':
                 self._roboc.move_east(1)
+            elif hitkey[0] == 'E':
+                self._roboc.move_east(int(hitkey[1]))
+            elif hitkey[0] == 'S':
+                self._roboc.move_south(int(hitkey[1]))
+            elif hitkey[0] == 'N':
+                self._roboc.move_north(int(hitkey[1]))
+            elif hitkey[0] == 'W':
+                self._roboc.move_west(int(hitkey[1]))
         if(self._roboc.is_won()):
             print('You\'re out. Congratulations.')
         else:

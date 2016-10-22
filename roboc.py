@@ -41,7 +41,7 @@ class Roboc(object):
         content = self._currentmaze[self._robot_place[0]+1, \
             self._robot_place[1]]
         if content.is_crossable():
-            self._robot_place = (self._robot_place[0] + 1, self._robot_place[1])
+            self._robot_place = (self._robot_place[0]+1, self._robot_place[1])
             self.autosave()
 
     def move_south(self, nb_cells):
@@ -110,21 +110,17 @@ class Roboc(object):
     def autosave(self):
         """Method to save the current game to a file."""
         with open('autosav.sav', 'w') as savefile:
-            savefile.write(str(self._get_game()))
+            savefile.write(str(self.currentmaze))
+        with open('autosavP.sav', 'w') as savefile:
+            savefile.write(str(self.robot_place))
 
     def reloadautosave(self):
         """Method to reload autosaved game."""
         self._currentmaze = mazemap.Mazemap(filename='autosav.sav')
-        nrow = 0
-        ncol = 0
-        for row in self._currentmaze.grid:
-            for col in row:
-                if type(col) is grid_cell.Robot:
-                    self._robot_place = (nrow, ncol)
-                    return
-                ncol += 1
-            ncol = 0
-            nrow += 1
+        with open('autosavP.sav', 'r') as loadFile:
+            posTupleRead = loadFile.read()
+            posTuple = posTupleRead[1:len(posTupleRead)-1].split(', ')
+            self._robot_place = int(posTuple[0]), int(posTuple[1])
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)

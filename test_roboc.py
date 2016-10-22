@@ -201,4 +201,6 @@ class RobocTest(unittest.TestCase):
         rob2 = roboc.Roboc('testmazedicttwo')
         rob2.reloadautosave()
         self.assertEqual(str(rob1.game), str(rob2.game))
+        # Assert that robot has been removed from maze.
+        self.assertEqual(str(rob1.currentmaze), str(rob2.currentmaze))
         
