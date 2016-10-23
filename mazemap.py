@@ -85,6 +85,21 @@ class Mazemap(object):
         """Get the grid heigth."""
         return len(self._grid)
 
+    def col_range(self, nrow):
+        """Get the range of accessible columns in the row."""
+        row = self._grid[nrow]
+        colmin = 0
+        while colmin <= len(row):
+            if type(row[colmin]) is grid_cell.Wall:
+                break
+            colmin += 1
+        colmax = len(row)-1
+        while colmax >= colmin:
+            if type(row[colmax]) is grid_cell.Wall:
+                break
+            colmax -= 1
+        return (colmin, colmax)
+
     def __str__(self):
         """ Get grid as a string."""
         string = str('')

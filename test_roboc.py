@@ -216,8 +216,9 @@ class RobocTest(unittest.TestCase):
             type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Wall)
         self.assertNotEqual(
             type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Exit)
-#        self.assertEqual(
-#            type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Robot)
+        self.assertTrue(
+            type(rob1.currentmaze.grid[pos[0]][pos[1]]) \
+            is grid_cell.Empty or grid_cell.Door)
 
         def test_score(self):
             """Test method to compute score."""

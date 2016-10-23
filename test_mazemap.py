@@ -52,11 +52,10 @@ class MazemapTest(unittest.TestCase):
         mymap = Mazemap(string)
         string2 = 'OOOO\nO  U\nO  O\nOOOO'
         mymap2 = Mazemap(string2)
-        self.assertFalse(mymap==string)
-        self.assertFalse(mymap==mymap2)
+        self.assertFalse(mymap == string)
+        self.assertFalse(mymap == mymap2)
         mymap3 = Mazemap(string)
-        self.assertTrue(mymap==mymap3)
-        
+        self.assertTrue(mymap == mymap3)
 
     def test_init_from_file(self):
         """Test construction from a file."""
@@ -92,6 +91,35 @@ class MazemapTest(unittest.TestCase):
         self.assertEqual(mymap.height, 3)
         mymap = Mazemap('OO\nOO')
         self.assertEqual(mymap.height, 2)
+
+    def test_col_range(self):
+        """Test Method to get number of rows."""
+        string = 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n'+ \
+            'O . O O   O                                           O\n' + \
+            'OOO O O   O       O OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  OOO\n' + \
+            'O O O OO.OO       O  O                           OO   O\n' + \
+            'O . O             OOOO             O              OOO O\n' + \
+            'O O O    OOOOOOOOOO                O                  O\n' + \
+            'O OOOOOO.O              OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n' + \
+            'O        O              OUO                           O\n' + \
+            'O        O              O O     OOOOOOOOOOOOOOOOOOOOOOO\n' + \
+            'OOOOOOOOOOOOOOOOOOO.OO OO O     OOOOOOOOOOOOOOOOO      \n' + \
+            'O                      O  O                     O      \n' + \
+            'OOOOOOOO.OOOOOOOOOOOOO O.OOOOOOOOOOOOOOOOOO.OOO.OOOOO.O\n' + \
+            'O          O      O    O  O              O   O        O\n' + \
+            'OOOOOOOOOOOOO.O.OOOOO. OO OOOOOOOOOO     O   O        O\n' + \
+            'O             O        O                 O   O        O\n' + \
+            'OOOOO.OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO.OOOOO.OOOO.OOOOOOO\n' + \
+            'O                                  O         O  O      \n' + \
+            'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO   O         O  O      \n' + \
+            '                               O  OOOOOOOOOOO   OOOOOOO\n' + \
+            '                               O                      O\n' + \
+            '                               OOOOOOOOOOOOOOOOOOOOOOOO'
+        mymap = Mazemap(string)
+        self.assertEqual(mymap.height, 21)
+        self.assertEqual(mymap.col_range(0), (0, 54))
+        self.assertEqual(mymap.col_range(17), (0, 48))
+        self.assertEqual(mymap.col_range(18), (31, 54))
 
     def test_get_cell(self):
         """Test method to read a cell."""

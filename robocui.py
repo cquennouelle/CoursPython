@@ -78,6 +78,7 @@ class RobocUI(object):
         """Test run roboc."""
         self._print_mazelist()
         self._select_maze()
+        self._roboc.random_robot_place()
         self._play_game()
 
 if __name__ == '__main__':

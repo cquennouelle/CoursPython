@@ -8,6 +8,7 @@ Created on Sat Oct 15 15:17:58 2016
 import mazedict
 import grid_cell
 import mazemap
+import random
 
 class Roboc(object):
     """Class containing the game Roboc."""
@@ -95,7 +96,14 @@ class Roboc(object):
 
     def random_robot_place(self):
         """Method to randomly place robot in the maze."""
-        pass
+        place_found = False
+        while not place_found:
+            xrow = random.randrange(self._currentmaze.height)
+            row = self._currentmaze.col_range(xrow)
+            xcol = random.randrange(row[1] - row[0]) + row[0]
+            if type(self._currentmaze.grid[xrow][xcol]) is grid_cell.Empty:
+                place_found = True
+        self._robot_place = (xrow, xcol)
 
     def _get_robot_place(self):
         """Get robot place."""
