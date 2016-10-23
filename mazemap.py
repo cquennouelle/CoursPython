@@ -9,6 +9,17 @@ import grid_cell
 class Mazemap(object):
     """Class representing a map."""
 
+    def __init__(self, string='', filename=''):
+        if type(string) is not str:
+            raise TypeError("Requires a string to build a maze.")
+        if string == '':
+            if filename == '':
+                self._grid = []
+            else:
+                self._load_from_file(filename)
+        else:
+            self._load_from_string(string)
+
     def _load_from_string(self, string):
         """Load a grid from a string."""
         size = len(string)
@@ -34,19 +45,30 @@ class Mazemap(object):
         with open(filename, 'w') as sourcefile:
             sourcefile.write(self.__str__())
 
-    def __init__(self, string='', filename=''):
-        if type(string) is not str:
-            raise TypeError("Requires a string to build a maze.")
-        if string == '':
-            if filename == '':
-                self._grid = []
-            else:
-                self._load_from_file(filename)
-        else:
-            self._load_from_string(string)
-
     def __repr__(self):
         return self.__str__()
+
+    def __eq__(self, mazemap2):
+        if type(mazemap2) == type(self):
+            if len(self.grid) == len(mazemap2.grid):
+                nrow = 0
+                for row in self.grid:
+                    row2 = mazemap2.grid[nrow]
+                    if len(row) == len(row2):
+                        ncol = 0
+                        for cell in row:
+                            if type(cell) is not type(row2[ncol]):
+                                return False
+                            ncol += 1
+                    nrow += 1
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def __ne__(self, mazemap2):
+        return not self.__eq__(mazemap2)
 
     def _get_grid(self):
         """Access to the grid."""

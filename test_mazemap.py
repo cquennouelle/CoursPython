@@ -46,6 +46,18 @@ class MazemapTest(unittest.TestCase):
         mymap = Mazemap(string)
         self.assertEqual(mymap.__str__(), string)
 
+    def test_equal(self):
+        """Test method equals."""
+        string = 'OOO\nO U\nOOO'
+        mymap = Mazemap(string)
+        string2 = 'OOOO\nO  U\nO  O\nOOOO'
+        mymap2 = Mazemap(string2)
+        self.assertFalse(mymap==string)
+        self.assertFalse(mymap==mymap2)
+        mymap3 = Mazemap(string)
+        self.assertTrue(mymap==mymap3)
+        
+
     def test_init_from_file(self):
         """Test construction from a file."""
         mymap = Mazemap(filename="LoadMazeFromFile.test")

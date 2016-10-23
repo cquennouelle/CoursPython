@@ -25,7 +25,7 @@ class RobocUI(object):
 
     def _select_maze(self):
         """Method to manage maze selection."""
-        nmaze = input('Enter selected maze number (1-{}): '.format(
+        nmaze = input('Enter selected maze number (0-{}): '.format(
             self._roboc.mazedict.size))
         try:
             nmaze = int(nmaze)
@@ -49,6 +49,7 @@ class RobocUI(object):
         """Method to play."""
         hitkey = ''
         while hitkey != 'end' and not self._roboc.is_won():
+            print('Your score is {}'.format(self._roboc.score))
             print(self._roboc.game)
             print('Use arrows or \'x\' to give up.')
             hitkey = get_char_code.get()
@@ -80,6 +81,6 @@ class RobocUI(object):
         self._play_game()
 
 if __name__ == '__main__':
-    RI = RobocUI('testmazedicttwo')
+    RI = RobocUI('maps')
     RI.run()
     

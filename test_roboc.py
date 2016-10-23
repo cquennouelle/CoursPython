@@ -7,6 +7,7 @@ Created on Sat Oct 15 15:20:45 2016
 
 import unittest
 import roboc
+import grid_cell
 
 class RobocTest(unittest.TestCase):
     """Test class Roboc."""
@@ -203,4 +204,27 @@ class RobocTest(unittest.TestCase):
         self.assertEqual(str(rob1.game), str(rob2.game))
         # Assert that robot has been removed from maze.
         self.assertEqual(str(rob1.currentmaze), str(rob2.currentmaze))
-        
+        self.assertEqual(rob2.score, 1)
+
+    def test_random_robot_place(self):
+        """Test method for random robot placing."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('maze1')
+        rob1.random_robot_place()
+        pos = rob1.robot_place
+        self.assertNotEqual(
+            type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Wall)
+        self.assertNotEqual(
+            type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Exit)
+#        self.assertEqual(
+#            type(rob1.currentmaze.grid[pos[0]][pos[1]]), grid_cell.Robot)
+
+        def test_score(self):
+            """Test method to compute score."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('maze1')
+        self.assertEqual(rob1.score, 0)
+        rob1.move_south(2)
+        rob1.move_south(2)
+        self.assertEqual(rob1.score, 2)
+            

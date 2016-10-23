@@ -18,6 +18,7 @@ class Roboc(object):
         self._mazedict.autosearch(directory)
         self._currentmaze = self._mazedict['mini']
         self._robot_place = (1, 1)
+        self._score = 0
 
     def _get_mazedict(self):
         """Get mazedict."""
@@ -46,6 +47,7 @@ class Roboc(object):
 
     def move_south(self, nb_cells):
         """Move robot of nb_cells south."""
+        self._score += 1
         for _ in range(nb_cells):
             self._move_south()
 
@@ -59,6 +61,7 @@ class Roboc(object):
 
     def move_east(self, nb_cells):
         """Move robot of nb_cells east."""
+        self._score += 1
         for _ in range(nb_cells):
             self._move_east()
 
@@ -72,6 +75,7 @@ class Roboc(object):
 
     def move_north(self, nb_cells):
         """Move robot of nb_cells north."""
+        self._score += 1
         for _ in range(nb_cells):
             self._move_north()
 
@@ -85,8 +89,13 @@ class Roboc(object):
 
     def move_west(self, nb_cells):
         """Move robot of nb_cells west."""
+        self._score += 1
         for _ in range(nb_cells):
             self._move_west()
+
+    def random_robot_place(self):
+        """Method to randomly place robot in the maze."""
+        pass
 
     def _get_robot_place(self):
         """Get robot place."""
@@ -102,6 +111,10 @@ class Roboc(object):
             string += '\n'
         return string[0:len(string)-1]
 
+    def _get_score(self):
+        """Method to get the current score."""
+        return self._score
+
     def is_won(self):
         """Method to know if the game is won."""
         current_cell = self._currentmaze[self._robot_place]
@@ -112,17 +125,21 @@ class Roboc(object):
         with open('autosav.sav', 'w') as savefile:
             savefile.write(str(self.currentmaze))
         with open('autosavP.sav', 'w') as savefile:
-            savefile.write(str(self.robot_place))
+            savefile.write(str(self.robot_place) + '\n' + str(self.score))
 
     def reloadautosave(self):
         """Method to reload autosaved game."""
         self._currentmaze = mazemap.Mazemap(filename='autosav.sav')
         with open('autosavP.sav', 'r') as loadFile:
-            posTupleRead = loadFile.read()
+            stringRead = loadFile.read()
+            listString = stringRead.split('\n')
+            posTupleRead = listString[0]
             posTuple = posTupleRead[1:len(posTupleRead)-1].split(', ')
             self._robot_place = int(posTuple[0]), int(posTuple[1])
+            self._score = int(listString[1])
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)
     mazedict = property(_get_mazedict)
     game = property(_get_game)
+    score = property(_get_score)
