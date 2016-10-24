@@ -41,7 +41,7 @@ def get():
         return 'right'
     elif k == '\x1b[D':
         return 'left'
-    elif k == 'x' or k == 'X':
+    elif k == 'q' or k == 'Q':
         return 'end'
     elif k[0] == 'E' or k[0] == 'S' or k[0] == 'W' or k[0] == 'N':
         print('multiple: {}'.format(k))

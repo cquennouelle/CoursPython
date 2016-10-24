@@ -119,18 +119,34 @@ class Roboc(object):
             string += '\n'
         return string[0:len(string)-1]
 
-    def _get_hidden_game(self, radius=1):
+    def _get_hidden_game(self, radius=2):
         """Method to get the robot surrounding map."""
         place = self.robot_place
         occupiedgrid = self._currentmaze.get_game(place)
-        string = '#####\n'
+        string_row = '+'
+        border_row = '+'
+        for col in range(2*radius+1):
+            string_row += '#'
+            border_row += '+'
+        string_row += '+'
+        border_row += '+'
+        string = border_row + '\n'
         for row in range(2*radius+1):
-            string += '#'
-            for col in range(2*radius+1):
-                string += str(
-                    occupiedgrid[place[0]-radius+row][place[1]-radius+col])
-            string += '#\n'
-        string += '#####'
+            nrow = place[0]-radius+row
+            if nrow < 0 or nrow >= len(occupiedgrid):
+                string += string_row
+            else:
+                string += '+'
+                for col in range(2*radius+1):
+                    ncol = place[1]-radius+col
+                    if ncol < 0 or ncol >= len(occupiedgrid[nrow]):
+                        string += '#'
+                    else:
+                        string += str(
+                            occupiedgrid[nrow][ncol])                            
+                string += '+'
+            string += '\n'
+        string += border_row
         return string
 
     def _get_score(self):

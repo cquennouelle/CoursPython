@@ -12,6 +12,30 @@ import grid_cell
 class RobocTest(unittest.TestCase):
     """Test class Roboc."""
 
+    def setUp(self):
+        """Construction"""
+        self.maze2 = 'OUOOOOOOOOOOOOOOOOOOOOO\n' \
+            + 'O O O O   O           O\n' \
+            + 'O O O O   O           O\n' \
+            + 'O O . OO.OO           O\n' \
+            + 'O . O             OOOOO\n' \
+            + 'O O O    OOOOOOOOOO   O\n' \
+            + 'OOOOOOOO.O            O\n' \
+            + 'O                     O\n' \
+            + 'O                     O\n' \
+            + 'OOOOOOOOOOOOOOOOOOO.OOO\n' \
+            + 'O                     O\n' \
+            + 'OOOOOOOO.OOOOOOOOOOOOOO\n' \
+            + 'O                 O   O\n' \
+            + 'OOOOOOOOOOOOOOO.OOOOO.O\n' \
+            + 'O                     O\n' \
+            + 'OOOOOOOOOOOOOOOOOOOOO O\n' \
+            + 'O                     O\n' \
+            + 'O                     O\n' \
+            + 'O                     O\n' \
+            + 'O                     O\n' \
+            + 'OOOOOOOOOOOOOOOOOOOOOOO'
+
     def test_init(self):
         """Test default construction."""
         rob = roboc.Roboc('testmazedicttwo')
@@ -27,27 +51,7 @@ class RobocTest(unittest.TestCase):
         """Test for selecting maze."""
         rob = roboc.Roboc('testmazedicttwo')
         rob.select_maze('maze2')
-        self.assertEqual(str(rob.currentmaze), 'OUOOOOOOOOOOOOOOOOOOOOO\n'
-            + 'O O O O   O           O\n'
-            + 'O O O O   O           O\n'
-            + 'O O . OO.OO           O\n'
-            + 'O . O             OOOOO\n'
-            + 'O O O    OOOOOOOOOO   O\n'
-            + 'OOOOOOOO.O            O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOO.OOO\n'
-            + 'O                     O\n'
-            + 'OOOOOOOO.OOOOOOOOOOOOOO\n'
-            + 'O                 O   O\n'
-            + 'OOOOOOOOOOOOOOO.OOOOO.O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOOOO O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOOOOOO')
+        self.assertEqual(str(rob.currentmaze), self.maze2)
         rob.select_maze('mini')
         self.assertEqual(str(rob.currentmaze), 'OOO\nO U\nOOO')
 
@@ -61,27 +65,7 @@ class RobocTest(unittest.TestCase):
         """Test for selecting maze by its index."""
         rob = roboc.Roboc('testmazedicttwo')
         rob.select_maze(1)
-        self.assertEqual(str(rob.currentmaze), 'OUOOOOOOOOOOOOOOOOOOOOO\n'
-            + 'O O O O   O           O\n'
-            + 'O O O O   O           O\n'
-            + 'O O . OO.OO           O\n'
-            + 'O . O             OOOOO\n'
-            + 'O O O    OOOOOOOOOO   O\n'
-            + 'OOOOOOOO.O            O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOO.OOO\n'
-            + 'O                     O\n'
-            + 'OOOOOOOO.OOOOOOOOOOOOOO\n'
-            + 'O                 O   O\n'
-            + 'OOOOOOOOOOOOOOO.OOOOO.O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOOOO O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'O                     O\n'
-            + 'OOOOOOOOOOOOOOOOOOOOOOO')
+        self.assertEqual(str(rob.currentmaze), self.maze2)
 
     def test_place_robot(self):
         """Test method to place a robot in the maze."""
@@ -229,10 +213,77 @@ class RobocTest(unittest.TestCase):
         rob1.move_south(2)
         self.assertEqual(rob1.score, 2)
 
-    def test_display_hidden_map(self):
+
+    def test_display_hidden_map_0(self):
+        """Test method to display partial map."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('mini')
+        self.assertEqual(rob1._get_hidden_game(1),
+                         '+++++\n' + \
+                         '+OOO+\n' + \
+                         '+O*U+\n' + \
+                         '+OOO+\n' + \
+                         '+++++')
+        self.assertEqual(rob1._get_hidden_game(2),
+                         '+++++++\n' + \
+                         '+#####+\n' + \
+                         '+#OOO#+\n' + \
+                         '+#O*U#+\n' + \
+                         '+#OOO#+\n' + \
+                         '+#####+\n' + \
+                         '+++++++')
+
+    def test_display_hidden_map_1(self):
         """Test method to display partial map."""
         rob1 = roboc.Roboc('testmazedicttwo')
         rob1.select_maze('maze2')
-        self.assertEqual(rob1.hidden_game, '#####\n#OUO#\n#O*O#\n#O O#\n#####')
+        self.assertEqual(rob1._get_hidden_game(1),
+                         '+++++\n' + \
+                         '+OUO+\n' + \
+                         '+O*O+\n' + \
+                         '+O O+\n' + \
+                         '+++++')
         rob1.move_south(3)
-        self.assertEqual(rob1.hidden_game, '#####\n#O O#\n#O*.#\n#O O#\n#####')
+        self.assertEqual(rob1._get_hidden_game(1),
+                         '+++++\n' + \
+                         '+O O+\n' + \
+                         '+O*.+\n' + \
+                         '+O O+\n' + \
+                         '+++++')
+
+    def test_display_hidden_map_2(self):
+        """Test method to display partial map."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('maze2')
+        self.assertEqual(rob1._get_hidden_game(2),
+                         '+++++++\n' + \
+                         '+#####+\n' + \
+                         '+#OUOO+\n' + \
+                         '+#O*O +\n' + \
+                         '+#O O +\n' + \
+                         '+#O O +\n' + \
+                         '+++++++')
+        rob1.move_south(3)
+        self.assertEqual(rob1._get_hidden_game(2),
+                         '+++++++\n' + \
+                         '+#O O +\n' + \
+                         '+#O O +\n' + \
+                         '+#O*. +\n' + \
+                         '+#O O +\n' + \
+                         '+#OOOO+\n' + \
+                         '+++++++')
+        rob1.move_east(2)
+        rob1.move_north(1)
+        rob1.move_east(2)
+        rob1.move_south(1)
+        rob1.move_east(12)
+        rob1.move_north(3)
+        rob1.move_east(4)
+        self.assertEqual(rob1._get_hidden_game(2),
+                         '+++++++\n' + \
+                         '+#####+\n' + \
+                         '+OOOO#+\n' + \
+                         '+  *O#+\n' + \
+                         '+   O#+\n' + \
+                         '+   O#+\n' + \
+                         '+++++++')

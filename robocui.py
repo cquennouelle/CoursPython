@@ -30,11 +30,11 @@ class RobocUI(object):
         try:
             nmaze = int(nmaze)
             if nmaze < 0 or nmaze > self._roboc.mazedict.size:
-                    print("Please, enter a number between 0 and {}.".format(
-                        self._roboc.mazedict.size))
-                    self._select_maze()
+                print("Please, enter a number between 0 and {}.".format(
+                    self._roboc.mazedict.size))
+                self._select_maze()
             else:
-                if(nmaze == 0):
+                if nmaze == 0:
                     self._roboc.reloadautosave()
                     print('Reload last game')
                 else:
@@ -53,7 +53,7 @@ class RobocUI(object):
             print(self._roboc.currentmaze)
             print("Your viewpoint:")
             print(self._roboc.hidden_game)
-            print('Use arrows or \'x\' to give up.')
+            print('Use arrows or \'q\' to give up.')
             hitkey = get_char_code.get()
             if hitkey == 'down':
                 self._roboc.move_south(1)
@@ -71,7 +71,7 @@ class RobocUI(object):
                 self._roboc.move_north(int(hitkey[1]))
             elif hitkey[0] == 'W':
                 self._roboc.move_west(int(hitkey[1]))
-        if(self._roboc.is_won()):
+        if self._roboc.is_won():
             print('You\'re out. Congratulations.')
         else:
             print('Looser...')
