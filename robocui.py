@@ -50,7 +50,9 @@ class RobocUI(object):
         hitkey = ''
         while hitkey != 'end' and not self._roboc.is_won():
             print('Your score is {}'.format(self._roboc.score))
-            print(self._roboc.game)
+            print(self._roboc.currentmaze)
+            print("Your viewpoint:")
+            print(self._roboc.hidden_game)
             print('Use arrows or \'x\' to give up.')
             hitkey = get_char_code.get()
             if hitkey == 'down':

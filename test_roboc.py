@@ -15,7 +15,7 @@ class RobocTest(unittest.TestCase):
     def test_init(self):
         """Test default construction."""
         rob = roboc.Roboc('testmazedicttwo')
-        self.assertEqual(rob._mazedict.size, 3)
+        self.assertEqual(rob.mazedict.size, 3)
 
     def test_get_current_maze(self):
         """Test for selecting maze."""
@@ -220,12 +220,19 @@ class RobocTest(unittest.TestCase):
             type(rob1.currentmaze.grid[pos[0]][pos[1]]) \
             is grid_cell.Empty or grid_cell.Door)
 
-        def test_score(self):
-            """Test method to compute score."""
+    def test_score(self):
+        """Test method to compute score."""
         rob1 = roboc.Roboc('testmazedicttwo')
         rob1.select_maze('maze1')
         self.assertEqual(rob1.score, 0)
         rob1.move_south(2)
         rob1.move_south(2)
         self.assertEqual(rob1.score, 2)
-            
+
+    def test_display_hidden_map(self):
+        """Test method to display partial map."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('maze2')
+        self.assertEqual(rob1.hidden_game, '#####\n#OUO#\n#O*O#\n#O O#\n#####')
+        rob1.move_south(3)
+        self.assertEqual(rob1.hidden_game, '#####\n#O O#\n#O*.#\n#O O#\n#####')

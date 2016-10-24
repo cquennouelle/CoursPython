@@ -119,6 +119,20 @@ class Roboc(object):
             string += '\n'
         return string[0:len(string)-1]
 
+    def _get_hidden_game(self, radius=1):
+        """Method to get the robot surrounding map."""
+        place = self.robot_place
+        occupiedgrid = self._currentmaze.get_game(place)
+        string = '#####\n'
+        for row in range(2*radius+1):
+            string += '#'
+            for col in range(2*radius+1):
+                string += str(
+                    occupiedgrid[place[0]-radius+row][place[1]-radius+col])
+            string += '#\n'
+        string += '#####'
+        return string
+
     def _get_score(self):
         """Method to get the current score."""
         return self._score
@@ -138,16 +152,17 @@ class Roboc(object):
     def reloadautosave(self):
         """Method to reload autosaved game."""
         self._currentmaze = mazemap.Mazemap(filename='autosav.sav')
-        with open('autosavP.sav', 'r') as loadFile:
-            stringRead = loadFile.read()
-            listString = stringRead.split('\n')
-            posTupleRead = listString[0]
-            posTuple = posTupleRead[1:len(posTupleRead)-1].split(', ')
-            self._robot_place = int(posTuple[0]), int(posTuple[1])
-            self._score = int(listString[1])
+        with open('autosavP.sav', 'r') as loadfile:
+            stringread = loadfile.read()
+            liststring = stringread.split('\n')
+            pos_tuple_read = liststring[0]
+            pos_tuple = pos_tuple_read[1:len(pos_tuple_read)-1].split(', ')
+            self._robot_place = int(pos_tuple[0]), int(pos_tuple[1])
+            self._score = int(liststring[1])
 
     currentmaze = property(_get_currentmaze)
     robot_place = property(_get_robot_place)
     mazedict = property(_get_mazedict)
     game = property(_get_game)
     score = property(_get_score)
+    hidden_game = property(_get_hidden_game)
