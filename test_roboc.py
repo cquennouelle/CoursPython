@@ -218,13 +218,13 @@ class RobocTest(unittest.TestCase):
         """Test method to display partial map."""
         rob1 = roboc.Roboc('testmazedicttwo')
         rob1.select_maze('mini')
-        self.assertEqual(rob1._get_hidden_game(1),
+        self.assertEqual(rob1.get_hidden_game(1),
                          '+++++\n' + \
                          '+OOO+\n' + \
                          '+O*U+\n' + \
                          '+OOO+\n' + \
                          '+++++')
-        self.assertEqual(rob1._get_hidden_game(2),
+        self.assertEqual(rob1.get_hidden_game(2),
                          '+++++++\n' + \
                          '+#####+\n' + \
                          '+#OOO#+\n' + \
@@ -237,14 +237,14 @@ class RobocTest(unittest.TestCase):
         """Test method to display partial map."""
         rob1 = roboc.Roboc('testmazedicttwo')
         rob1.select_maze('maze2')
-        self.assertEqual(rob1._get_hidden_game(1),
+        self.assertEqual(rob1.get_hidden_game(1),
                          '+++++\n' + \
                          '+OUO+\n' + \
                          '+O*O+\n' + \
                          '+O O+\n' + \
                          '+++++')
         rob1.move_south(3)
-        self.assertEqual(rob1._get_hidden_game(1),
+        self.assertEqual(rob1.get_hidden_game(1),
                          '+++++\n' + \
                          '+O O+\n' + \
                          '+O*.+\n' + \
@@ -255,7 +255,7 @@ class RobocTest(unittest.TestCase):
         """Test method to display partial map."""
         rob1 = roboc.Roboc('testmazedicttwo')
         rob1.select_maze('maze2')
-        self.assertEqual(rob1._get_hidden_game(2),
+        self.assertEqual(rob1.get_hidden_game(2),
                          '+++++++\n' + \
                          '+#####+\n' + \
                          '+#OUOO+\n' + \
@@ -264,7 +264,7 @@ class RobocTest(unittest.TestCase):
                          '+#O O +\n' + \
                          '+++++++')
         rob1.move_south(3)
-        self.assertEqual(rob1._get_hidden_game(2),
+        self.assertEqual(rob1.get_hidden_game(2),
                          '+++++++\n' + \
                          '+#O O +\n' + \
                          '+#O O +\n' + \
@@ -279,7 +279,7 @@ class RobocTest(unittest.TestCase):
         rob1.move_east(12)
         rob1.move_north(3)
         rob1.move_east(4)
-        self.assertEqual(rob1._get_hidden_game(2),
+        self.assertEqual(rob1.get_hidden_game(2),
                          '+++++++\n' + \
                          '+#####+\n' + \
                          '+OOOO#+\n' + \

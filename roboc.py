@@ -119,7 +119,7 @@ class Roboc(object):
             string += '\n'
         return string[0:len(string)-1]
 
-    def _get_hidden_game(self, radius=2):
+    def get_hidden_game(self, radius=2):
         """Method to get the robot surrounding map."""
         place = self.robot_place
         occupiedgrid = self._currentmaze.get_game(place)
@@ -143,7 +143,7 @@ class Roboc(object):
                         string += '#'
                     else:
                         string += str(
-                            occupiedgrid[nrow][ncol])                            
+                            occupiedgrid[nrow][ncol])
                 string += '+'
             string += '\n'
         string += border_row
@@ -181,4 +181,3 @@ class Roboc(object):
     mazedict = property(_get_mazedict)
     game = property(_get_game)
     score = property(_get_score)
-    hidden_game = property(_get_hidden_game)
