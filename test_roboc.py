@@ -204,6 +204,13 @@ class RobocTest(unittest.TestCase):
             type(rob1.currentmaze.grid[pos[0]][pos[1]]) \
             is grid_cell.Empty or grid_cell.Door)
 
+    def test_random_robot_place_mini(self):
+        """Test method to compute score."""
+        rob1 = roboc.Roboc('testmazedicttwo')
+        rob1.select_maze('mini')
+        rob1.random_robot_place()
+        self.assertEqual(rob1.robot_place, (1, 1))
+
     def test_score(self):
         """Test method to compute score."""
         rob1 = roboc.Roboc('testmazedicttwo')
@@ -232,6 +239,16 @@ class RobocTest(unittest.TestCase):
                          '+#OOO#+\n' + \
                          '+#####+\n' + \
                          '+++++++')
+        self.assertEqual(rob1.get_hidden_game(3),
+                         '+++++++++\n' + \
+                         '+#######+\n' + \
+                         '+#######+\n' + \
+                         '+##OOO##+\n' + \
+                         '+##O*U##+\n' + \
+                         '+##OOO##+\n' + \
+                         '+#######+\n' + \
+                         '+#######+\n' + \
+                         '+++++++++')
 
     def test_display_hidden_map_1(self):
         """Test method to display partial map."""

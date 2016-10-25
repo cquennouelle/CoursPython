@@ -120,6 +120,15 @@ class MazemapTest(unittest.TestCase):
         self.assertEqual(mymap.col_range(0), (0, 54))
         self.assertEqual(mymap.col_range(17), (0, 48))
         self.assertEqual(mymap.col_range(18), (31, 54))
+        
+    def test_col_range_mini(self):
+        """Test Method to get number of rows."""
+        string = 'OOO\nO U\nOOO'
+        mymap = Mazemap(string)
+        self.assertEqual(mymap.height, 3)
+        self.assertEqual(mymap.col_range(0), (0, 2))
+        self.assertEqual(mymap.col_range(1), (0, 2))
+        self.assertEqual(mymap.col_range(2), (0, 2))
 
     def test_get_cell(self):
         """Test method to read a cell."""
