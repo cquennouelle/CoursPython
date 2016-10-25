@@ -8,6 +8,7 @@ Created on Tue Oct 18 22:21:53 2016
 from __future__ import print_function
 from roboc import Roboc
 import get_char_code
+import os
 
 class RobocUI(object):
     """Class managing interaction with roboc."""
@@ -45,10 +46,15 @@ class RobocUI(object):
             print("Please, enter a valid number.")
             self._select_maze()
 
+    def _clear_screen(self):
+            os.system('cls')
+            os.system('clear')        
+
     def _play_game(self):
         """Method to play."""
         hitkey = ''
         while hitkey != 'end' and not self._roboc.is_won():
+            self._clear_screen()
             print('Your score is {}'.format(self._roboc.score))
 #            print(self._roboc.currentmaze)
             print("Your viewpoint:")
@@ -87,4 +93,3 @@ class RobocUI(object):
 if __name__ == '__main__':
     RI = RobocUI('maps')
     RI.run()
-    
