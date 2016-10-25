@@ -14,14 +14,17 @@ class _Getch(object):
         try:
             tty.setraw(sys.stdin.fileno())
             char_ = sys.stdin.read(1)
-            if char_== '\x1b':
+            if char_ == '\x1b':
                 # Read an arrow or other special character
                 char_ += sys.stdin.read(2)
             else:
                 char_ = char_.upper()
                 if char_ == 'E' or char_ == 'S' or char_ == 'W' or char_ == 'N':
                     # Read a multiple movement
-                    char_ += sys.stdin.read(1)
+                    next_char = sys.stdin.read(1)
+                    if next_char in \
+                        ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                        char_ += next_char
         finally:
             termios.tcsetattr(fd_, termios.TCSADRAIN, old_settings)
         return char_
@@ -34,21 +37,25 @@ def get():
         if k != '':
             break
     if k == '\x1b[A':
-        return 'up'
+        command = 'up'
     elif k == '\x1b[B':
-        return 'down'
+        command = 'down'
     elif k == '\x1b[C':
-        return 'right'
+        command = 'right'
     elif k == '\x1b[D':
-        return 'left'
+        command = 'left'
     elif k == 'q' or k == 'Q':
-        return 'end'
+        command = 'end'
     elif k[0] == 'E' or k[0] == 'S' or k[0] == 'W' or k[0] == 'N':
-        print('multiple: {}'.format(k))
-        return k        
+        if len(k) > 1:
+            print('multiple: {}'.format(k))
+        else:
+            k += '1'
+        command = k
     else:
         print('not an arrow key! ({})'.format(k))
-        return ''
+        command = ''
+    return command
 
 def main():
     """Main method of the module."""

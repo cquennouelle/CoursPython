@@ -73,6 +73,7 @@ class RobocUI(object):
                 self._roboc.move_west(int(hitkey[1]))
         if self._roboc.is_won():
             print('You\'re out. Congratulations.')
+            print(self._roboc.game)
         else:
             print('Looser...')
 
