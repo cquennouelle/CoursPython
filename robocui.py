@@ -57,9 +57,14 @@ class RobocUI(object):
     def _get_command(self):
         """Get the command depending on os."""
         if os.name == 'posix':
+            print('Use arrows (or \'E\', \'S\', \'W\', \'N\' + a number) to move  or \'q\' to give up.')
             hitkey = get_char_code.get()
         elif  os.name == 'nt':
-            hitkey = input("windows:")
+            print('Use \'E\', \'S\', \'W\', \'N\' + a number to move. Or \'q\' to give up.')
+            hitkey = input()
+            hitkey = str(hitkey).upper()
+            if len(hitkey) == 0:
+                hitkey += '1'
         return hitkey
 
     def _play_game(self):
@@ -71,7 +76,6 @@ class RobocUI(object):
 #            print(self._roboc.currentmaze)
             print("Your viewpoint:")
             print(self._roboc.get_hidden_game(4))
-            print('Use arrows or \'q\' to give up.')
             hitkey = self._get_command()
             if hitkey == 'down':
                 self._roboc.move_south(1)
@@ -89,6 +93,8 @@ class RobocUI(object):
                 self._roboc.move_north(int(hitkey[1]))
             elif hitkey[0] == 'W':
                 self._roboc.move_west(int(hitkey[1]))
+            else:
+                print('Not a correct command.')
         if self._roboc.is_won():
             print('You\'re out. Congratulations.')
             print(self._roboc.game)
