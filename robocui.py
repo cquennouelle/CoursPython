@@ -60,11 +60,22 @@ class RobocUI(object):
             print('Use arrows (or \'E\', \'S\', \'W\', \'N\' + a number) to move  or \'q\' to give up.')
             hitkey = get_char_code.get()
         elif  os.name == 'nt':
-            print('Use \'E\', \'S\', \'W\', \'N\' + a number to move. Or \'q\' to give up.')
-            hitkey = input()
-            hitkey = str(hitkey).upper()
-            if len(hitkey) == 1:
-                hitkey += '1'
+            correct_command = False
+            while correct_command == False:
+                print('Use \'E\', \'S\', \'W\', \'N\' [+ 1-9] to move. Or \'q\' to give up.')
+                hitkeys = input()
+                char_ = hitkeys[0].upper()
+                if char_ == 'E' or char_ == 'S' or char_ == 'W' or char_ == 'N':
+                    # Read a multiple movement
+                    if len(hitkeys) == 1:
+                        char_ += '1'
+                        correct_command == True
+                    elif len(hitkeys) == 2:
+                        if hitkeys[1] in \
+                        ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                            char_ += hitkeys[1]
+                            correct_command == True
+            hitkey = char_.upper()
         return hitkey
 
     def _play_game(self):
