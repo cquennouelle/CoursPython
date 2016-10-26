@@ -63,7 +63,7 @@ class RobocUI(object):
             print('Use \'E\', \'S\', \'W\', \'N\' + a number to move. Or \'q\' to give up.')
             hitkey = input()
             hitkey = str(hitkey).upper()
-            if len(hitkey) == 0:
+            if len(hitkey) == 1:
                 hitkey += '1'
         return hitkey
 
