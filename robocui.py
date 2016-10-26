@@ -58,25 +58,22 @@ class RobocUI(object):
         """Get the command depending on os."""
         if os.name == 'posix':
             print('Use arrows (or \'E\', \'S\', \'W\', \'N\' + a number) to move  or \'q\' to give up.')
-            hitkey = get_char_code.get()
+            return get_char_code.get()
         elif  os.name == 'nt':
-            correct_command = False
-            while correct_command == False:
+            while 1:
                 print('Use \'E\', \'S\', \'W\', \'N\' [+ 1-9] to move. Or \'q\' to give up.')
                 hitkeys = input()
-                char_ = hitkeys[0].upper()
-                if char_ == 'E' or char_ == 'S' or char_ == 'W' or char_ == 'N':
-                    # Read a multiple movement
-                    if len(hitkeys) == 1:
-                        char_ += '1'
-                        correct_command == True
-                    elif len(hitkeys) == 2:
-                        if hitkeys[1] in \
-                        ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
-                            char_ += hitkeys[1]
-                            correct_command == True
-            hitkey = char_.upper()
-        return hitkey
+                if len(hitkeys) > 0:
+                    char_ = hitkeys[0].upper()
+                    if char_ == 'E' or char_ == 'S' or char_ == 'N' or char_ == 'W':
+                        if len(hitkeys) == 2:
+                           num_ = hitkeys[1]
+                           if num_ in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                               return char_ + num_
+                        else:
+                            return char_ + '1'
+                    elif char_ == 'Q':
+                        return 'end'
 
     def _play_game(self):
         """Method to play."""
@@ -104,6 +101,8 @@ class RobocUI(object):
                 self._roboc.move_north(int(hitkey[1]))
             elif hitkey[0] == 'W':
                 self._roboc.move_west(int(hitkey[1]))
+            elif hitkey == 'end':
+                return
             else:
                 print('Not a correct command.')
         if self._roboc.is_won():
