@@ -7,8 +7,9 @@ Created on Tue Oct 18 22:21:53 2016
 
 from __future__ import print_function
 from roboc import Roboc
-import get_char_code
 import os
+if os.name == 'posix':
+    import get_char_code
 
 class RobocUI(object):
     """Class managing interaction with roboc."""
@@ -47,8 +48,19 @@ class RobocUI(object):
             self._select_maze()
 
     def _clear_screen(self):
+        """Clear screen depending on os."""
+        if os.name == 'nt':
             os.system('cls')
+        else:
             os.system('clear')        
+
+    def _get_command(self):
+        """Get the command depending on os."""
+        if os.name == 'posix':
+            hitkey = get_char_code.get()
+        elif  os.name == 'nt':
+            hitkey = input("windows:")
+        return hitkey
 
     def _play_game(self):
         """Method to play."""
@@ -60,7 +72,7 @@ class RobocUI(object):
             print("Your viewpoint:")
             print(self._roboc.get_hidden_game(4))
             print('Use arrows or \'q\' to give up.')
-            hitkey = get_char_code.get()
+            hitkey = self._get_command()
             if hitkey == 'down':
                 self._roboc.move_south(1)
             elif hitkey == 'up':
