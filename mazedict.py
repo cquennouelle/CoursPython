@@ -11,12 +11,14 @@ from operator import itemgetter
 class Mazedict(object):
     """Class representing a dictionary of mazes."""
 
-    def __init__(self):
+    def __init__(self, dirname=''):
         """Construction."""
         self._dict = {}
         self._mazelist = []
+        if not dirname=='':
+            self._autosearch(dirname)
 
-    def autosearch(self, dirname):
+    def _autosearch(self, dirname):
         """Look for all existing mazemap in the repository 'rep'."""
         if type(dirname) is not str:
             raise TypeError
