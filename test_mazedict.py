@@ -19,7 +19,7 @@ class MazedictTest(unittest.TestCase):
     def test_autosearch_0(self):
         """Test for autosearch method."""
         with self.assertRaises(FileNotFoundError):
-            _ = mazedict.Mazedict('erroneousrepname')
+            mazedict.Mazedict('erroneousrepname')
 
     def test_autosearch_1(self):
         """Test for autosearch method."""
@@ -34,7 +34,7 @@ class MazedictTest(unittest.TestCase):
     def test_autosearch_error(self):
         """Test autosearch with erroneous parameter type."""
         with self.assertRaises(TypeError):
-            _ = mazedict.Mazedict(1)
+            mazedict.Mazedict(1)
 
     def test_get_item_by_string(self):
         """Test access value through a key."""
