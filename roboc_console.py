@@ -10,6 +10,7 @@ import roboc_ui
 import os
 if os.name == 'posix':
     import get_char_code
+import roboc_command
 
 class RobocConsole(roboc_ui.RobocUI):
     """Class to interact through console."""
@@ -27,14 +28,14 @@ class RobocConsole(roboc_ui.RobocUI):
             os.system('clear')
 
     @staticmethod
-    def _get_command_linux():
+    def _get_code_command_linux():
         """Get command from keyboard."""
         print('Use arrows (or \'E\', \'S\', \'W\',' +\
             '\'N\' + a number) to move  or \'q\' to give up.')
         return get_char_code.get()
 
     @staticmethod
-    def _get_command_windows():
+    def _get_code_command_windows():
         """Get command from keyboard."""
         while 1:
             print('Use \'E\', \'S\', \'W\', \'N\'' +\
@@ -52,12 +53,30 @@ class RobocConsole(roboc_ui.RobocUI):
                 elif char_ == 'Q':
                     return 'end'
 
+    def _build_command(self, code_command):
+        """Build command from string."""
+        if code_command == 'end':
+            return roboc_command.RobocCommandExit()
+        elif code_command[0] == 'E':
+            return roboc_command.RobocMoveEast(int(code_command[1:]))
+        elif code_command[0] == 'W':
+            return roboc_command.RobocMoveWest(int(code_command[1:]))
+        elif code_command[0] == 'S':
+            return roboc_command.RobocMoveSouth(int(code_command[1:]))
+        elif code_command[0] == 'N':
+            return roboc_command.RobocMoveNorth(int(code_command[1:]))
+        else:
+            print(code_command)
+            raise ValueError()
+
     def get_command(self):
         """Get the command depending on os."""
         if os.name == 'posix':
-            return self._get_command_linux()
+            code_command = self._get_code_command_linux()
         elif  os.name == 'nt':
-            return self._get_command_windows()
+            code_command = self._get_code_command_windows()
+        command = self._build_command(code_command)
+        return command
 
     def update_display(self):
         """Display stuff at the beginning of each turn."""

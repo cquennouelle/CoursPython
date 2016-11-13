@@ -6,6 +6,7 @@ Created on Tue Oct 18 22:21:53 2016
 """
 
 import roboc
+import roboc_command
 
 class RobocInteractions(object):
     """Class managing interaction with roboc."""
@@ -64,29 +65,12 @@ class RobocInteractions(object):
     def play_game(self):
         """Method to play."""
         command = ''
-        while command != 'end' and not self._roboc.is_won():
+        while not self._roboc.is_won():
             self._robocui.update_display()
             command = self._robocui.get_command()
-            if command == 'down':
-                self._roboc.move_south(1)
-            elif command == 'up':
-                self._roboc.move_north(1)
-            elif command == 'left':
-                self._roboc.move_west(1)
-            elif command == 'right':
-                self._roboc.move_east(1)
-            elif command[0] == 'E':
-                self._roboc.move_east(int(command[1]))
-            elif command[0] == 'S':
-                self._roboc.move_south(int(command[1]))
-            elif command[0] == 'N':
-                self._roboc.move_north(int(command[1]))
-            elif command[0] == 'W':
-                self._roboc.move_west(int(command[1]))
-            elif command == 'end':
-                return
-            else:
-                self._robocui.print_message('Not a correct command.')
+            command.execute(self._roboc)
+            if isinstance(command, roboc_command.RobocCommandExit):
+                break
         if self._roboc.is_won():
             self._robocui.print_message('You\'re out. Congratulations.')
             self._robocui.print_message(self._roboc.game)

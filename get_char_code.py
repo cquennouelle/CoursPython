@@ -37,13 +37,13 @@ def get():
         if k != '':
             break
     if k == '\x1b[A':
-        command = 'up'
+        command = 'N1'
     elif k == '\x1b[B':
-        command = 'down'
+        command = 'S1'
     elif k == '\x1b[C':
-        command = 'right'
+        command = 'E1'
     elif k == '\x1b[D':
-        command = 'left'
+        command = 'W1'
     elif k == 'q' or k == 'Q':
         command = 'end'
     elif k[0] == 'E' or k[0] == 'S' or k[0] == 'W' or k[0] == 'N':
