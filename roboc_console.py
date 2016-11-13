@@ -6,42 +6,35 @@ Created on Sun Oct 30 21:24:19 2016
 """
 
 from __future__ import print_function
-import irobocui
+import roboc_ui
 import os
 if os.name == 'posix':
     import get_char_code
 
-class RobocConsole(irobocui.IRobocUI):
+class RobocConsole(roboc_ui.RobocUI):
     """Class to interact through console."""
 
     def __init__(self):
         """Construction."""
         super(RobocConsole, self).__init__()
-#        self.robocui = roboc_interactions.RobocInteractions(directory='maps', robocui=self)
 
-#    def _set_roboc(self, roboc):
-#        """Bind to an instance of roboc."""
-#        self._roboc = roboc
-
-#    def run(self):
-#        """Method run roboc."""
-#        self.robocui.launch_game()
-#        self.robocui.play_game()
-
-    def _clear_screen(self):
+    @staticmethod
+    def _clear_screen():
         """Clear screen depending on os."""
         if os.name == 'nt':
             os.system('cls')
         else:
             os.system('clear')
 
-    def _get_command_linux(self):
+    @staticmethod
+    def _get_command_linux():
         """Get command from keyboard."""
         print('Use arrows (or \'E\', \'S\', \'W\',' +\
             '\'N\' + a number) to move  or \'q\' to give up.')
         return get_char_code.get()
 
-    def _get_command_windows(self):
+    @staticmethod
+    def _get_command_windows():
         """Get command from keyboard."""
         while 1:
             print('Use \'E\', \'S\', \'W\', \'N\'' +\
@@ -74,11 +67,9 @@ class RobocConsole(irobocui.IRobocUI):
         print("Your viewpoint:")
         print(self._roboc.get_hidden_game(4))
 
-    def print(self, message):
+    def print_message(self, message):
         """Print message to screen."""
         print(message)
-
-#    roboc = property(fset=_set_roboc)
 
 if __name__ == '__main__':
     RI = RobocConsole()

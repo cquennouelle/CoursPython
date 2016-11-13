@@ -20,14 +20,15 @@ class Mazedict(object):
 
     def _autosearch(self, dirname):
         """Look for all existing mazemap in the repository 'rep'."""
-        if type(dirname) is not str:
+        if not isinstance(dirname, str):
             raise TypeError
         dirlist = os.listdir(dirname)
         dirlist.sort()
+        _maze_filetype='.maze'
         for filename in dirlist:
-            if filename.endswith(".maze"):
+            if filename.endswith(_maze_filetype):
                 pathname = os.path.join(dirname, filename)
-                mazename = filename[:-5].lower()
+                mazename = filename[:-len(_maze_filetype)].lower()
                 self._dict[mazename] = mazemap.Mazemap(filename=pathname)
         # Sort dictionary and put it in a list
         self._mazelist = []

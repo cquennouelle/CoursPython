@@ -30,7 +30,8 @@ class Mazemap(object):
                 if len(row) > 0:
                     gridrow = []
                     for letter in row:
-                        gridrow.append(grid_cell.GridCell.from_char(letter))
+                        if letter in 'OU. ':
+                            gridrow.append(grid_cell.GridCell.from_char(letter))
                     self._grid.append(gridrow)
 
     def _load_from_file(self, filename):

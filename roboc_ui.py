@@ -7,12 +7,12 @@ Created on Tue Nov  1 09:42:38 2016
 
 import roboc_interactions
 
-class IRobocUI(object):
+class RobocUI(object):
     """Interface for UI classes."""
 
     def __init__(self):
         """Construction."""
-        self.robocui = roboc_interactions.RobocInteractions(
+        self._interactions = roboc_interactions.RobocInteractions(
             directory='maps',
             robocui=self)
 
@@ -21,9 +21,9 @@ class IRobocUI(object):
         self._roboc = roboc
 
     def run(self):
-        """Test run roboc."""
-        self.robocui.launch_game()
-        self.robocui.play_game()
+        """Method run roboc."""
+        self._interactions.launch_game()
+        self._interactions.play_game()
 
     def get_command(self):
         """Get the command depending on os."""
@@ -33,7 +33,7 @@ class IRobocUI(object):
         """Display stuff at the beginning of each turn."""
         raise NotImplementedError('Interface for UI')
         
-    def print(self, message):
+    def print_message(self, message):
         """Method to print."""
         raise NotImplementedError('Interface for UI')
 

@@ -30,7 +30,7 @@ class Roboc(object):
 
     def select_maze(self, maze='mini'):
         """Select a maze by its name."""
-        if type(maze) is str or type(maze) is int:
+        if isinstance(maze, str) or isinstance(maze, int):
             self._currentmaze = self._mazedict[maze]
         else:
             raise TypeError
@@ -98,7 +98,7 @@ class Roboc(object):
             xrow = random.randrange(self._currentmaze.height)
             row = self._currentmaze.col_range(xrow)
             xcol = random.randrange(row[1] - row[0]) + row[0]
-            if type(self._currentmaze.grid[xrow][xcol]) is grid_cell.Empty:
+            if isinstance(self._currentmaze.grid[xrow][xcol], grid_cell.Empty):
                 place_found = True
         self._robot_place = (xrow, xcol)
 
@@ -153,7 +153,7 @@ class Roboc(object):
     def is_won(self):
         """Method to know if the game is won."""
         current_cell = self._currentmaze[self._robot_place]
-        return type(current_cell) is grid_cell.Exit
+        return isinstance(current_cell, grid_cell.Exit)
 
     def autosave(self):
         """Method to save the current game to a file."""

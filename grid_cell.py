@@ -21,9 +21,10 @@ class GridCell(object):
         """Method to know if the robot can go on this cell."""
         return self._is_crossable
 
+    @staticmethod
     def from_char(character):
         """Factory method."""
-        if type(character) is not str:
+        if not isinstance(character, str):
             raise TypeError
         if character == 'U':
             return Exit()
@@ -36,7 +37,7 @@ class GridCell(object):
         elif character == '*':
             return Robot()
         else:
-            print('Received \'{}\' as parameter.'.format(character))
+            print('Received \'{0}\' as parameter.'.format(character))
             raise ValueError
 
 class Exit(GridCell):
