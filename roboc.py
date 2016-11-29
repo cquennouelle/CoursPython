@@ -178,3 +178,8 @@ class Roboc(object):
     mazedict = property(_get_mazedict)
     game = property(_get_game)
     score = property(_get_score)
+
+if __name__ == '__main__':
+    import roboc_console
+    RI = roboc_console.RobocConsole()
+    RI.run()
